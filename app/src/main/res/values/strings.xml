@@ -12,4 +12,6 @@
     <string name="menu_slideshow">Slideshow</string>
     <string name="graph_now">Graph Now!</string>
     <string name="reset">Reset</string>
+    <string name="upload_image">Upload Image</string>
+    <string name="something_went_wrong">Something Went Wrong</string>
 </resources>

@@ -1,9 +1,11 @@
 package com.example.vincballs;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 import androidx.webkit.WebViewAssetLoader;
 
 import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.webkit.JavascriptInterface;
@@ -52,6 +54,15 @@ public class DesmosWebView extends AppCompatActivity {
 
         wvDesmos.addJavascriptInterface(new WebAppInterface(this, coefficientsList),"WebAppInterface");
 
-        wvDesmos.loadUrl("https://appassets.androidplatform.net/assets/index.html");
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        // Read the user's visual engine from the SharedPreferences
+        String visualEngine = sharedPreferences.getString("visual_engine", "Desmos");
+
+        if(visualEngine.equals("Desmos")){
+            wvDesmos.loadUrl("https://appassets.androidplatform.net/assets/index.html");
+        }else {
+            wvDesmos.loadUrl("https://appassets.androidplatform.net/assets/p5.html");
+        }
     }
 }

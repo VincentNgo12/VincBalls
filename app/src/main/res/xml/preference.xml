@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ListPreference
+        app:key="visual_engine"
+        app:title="Visual Engine"
+        app:entries="@array/visualizer_entries"
+        app:entryValues="@array/visualizer_values"
+        app:defaultValue="Desmos"/>
+</PreferenceScreen>

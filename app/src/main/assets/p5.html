@@ -1,0 +1,80 @@
+<!-- desmos.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Desmos Visualizer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/addons/p5.sound.min.js"></script>
+    <style>
+        html, body {
+          margin: 0;
+          padding: 0;
+        }
+        canvas {
+          display: block;
+        }
+    </style>
+</head>
+<body>
+<main></main>
+    <script>
+            let arrayOfList = JSON.parse(WebAppInterface.getCoefficientsList());
+            let coefficientsList = [];
+
+            for(coefficients of arrayOfList){
+                list = JSON.parse(coefficients);
+                coefficientsList.push(list);
+            }
+
+
+            let mags = [];
+            let freqs = [];
+            let phases = [];
+
+
+            for(coefficients of coefficientsList){
+                let mag = [];
+                let freq = [];
+                let phase = [];
+
+                coefficients.forEach(coefficient => {
+                    mag.push(coefficient.mag);
+                    freq.push(coefficient.freq);
+                    phase.push(coefficient.phase);
+                })
+
+                mags.push(mag);
+                freqs.push(freq);
+                phases.push(phase);
+            }
+
+
+            function plotFourier(x,y,rotation,contourIndex){
+              let previousX = x;
+              let previousY = y;
+              for(let i=0;i<mags[contourIndex].length;i++){
+                let freq = freqs[contourIndex][i]
+                let radius = mags[contourIndex][i]
+                let phase = phases[contourIndex][i]
+                x += cos(freq*t+phase+rotation)*radius;
+                y += sin(freq*t+phase+rotation)*radius;
+
+                stroke(255);
+                noFill();
+                ellipse(previousX,previousY,radius*2);
+
+
+                fill(255)
+                line(previousX,previousY,x,y)
+
+                previousX = x;
+                previousY = y;
+
+              }
+              return createVector(x,y)
+            }
+        </script>
+<script src="https://appassets.androidplatform.net/assets/sketch.js"></script>
+</body>
+</html>

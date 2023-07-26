@@ -6,9 +6,8 @@ mags.forEach(()=>{
     path.push([])
 })
 
-
 function setup() {
-  createCanvas(400, 800)
+  createCanvas(400, 800);
 }
 
 function touchMoved() {
@@ -51,6 +50,6 @@ function draw() {
         endShape()
     }
 
-      const dt = TWO_PI/500
+      const dt = TWO_PI/1000;
       t += dt
 }

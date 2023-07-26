@@ -31,6 +31,7 @@
             let mags = [];
             let freqs = [];
             let phases = [];
+            let longestContour = 0;
 
 
             for(coefficients of coefficientsList){
@@ -49,6 +50,12 @@
                 phases.push(phase);
             }
 
+
+            mags.forEach(contour => {
+                if(contour.length > longestContour){
+                    longestContour = contour.length;
+                }
+            })
 
             function plotFourier(x,y,rotation,contourIndex){
               let previousX = x;

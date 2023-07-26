@@ -21,6 +21,22 @@ public class Sketch extends PApplet {
         state = "Draw";
     }
 
+    private ArrayList<PVector> populateDrawing(ArrayList<PVector> currentDrawing){
+        ArrayList<PVector> populatedDrawing = new ArrayList<>();
+        for(int i=0;i<currentDrawing.size()-1;i++){
+            PVector p1 = currentDrawing.get(i);
+            PVector p2 = currentDrawing.get(i + 1);
+            populatedDrawing.add(p1);
+            for(int j=0;j<8;j++){
+                float atm = (float) j/10;
+                PVector middle = p1.lerp(p2,atm);
+                populatedDrawing.add(middle);
+            }
+        }
+        populatedDrawing.add(currentDrawing.get(currentDrawing.size()-1));
+        return populatedDrawing;
+    }
+
     public void mouseReleased(){
         drawing.add(currentDrawing);
         state = "Done";

@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import processing.core.PVector;
 
@@ -29,7 +30,7 @@ public class DiscreteFourierTransform {
         }
     }
 
-    static class FourierCoefficient implements Parcelable{
+    static class FourierCoefficient{
         public double mag;
         public double freq;
         public double phase;
@@ -41,37 +42,14 @@ public class DiscreteFourierTransform {
             this.phase = Math.atan2(im,re);
             this.mag = Math.sqrt(re*re+im*im);
         }
+    }
 
-        // Parcelable methods
+
+    static class FourierCoefficientComparator implements Comparator<FourierCoefficient> {
         @Override
-        public int describeContents() {
-            return 0;
+        public int compare(FourierCoefficient c1, FourierCoefficient c2) {
+            return (int) (c2.mag - c1.mag);
         }
-
-        @Override
-        public void writeToParcel(Parcel dest, int flags) {
-            dest.writeDouble(mag);
-            dest.writeDouble(freq);
-            dest.writeDouble(phase);
-        }
-
-        public static final Parcelable.Creator<FourierCoefficient> CREATOR = new Parcelable.Creator<FourierCoefficient>() {
-            @Override
-            public FourierCoefficient createFromParcel(Parcel source) {
-                double mag = source.readDouble();
-                double freq = source.readDouble();
-                double phase = source.readDouble();
-                FourierCoefficient coefficient = new FourierCoefficient(null, freq, 0);
-                coefficient.mag = mag;
-                coefficient.phase = phase;
-                return coefficient;
-            }
-
-            @Override
-            public FourierCoefficient[] newArray(int size) {
-                return new FourierCoefficient[size];
-            }
-        };
     }
 
 

@@ -53,6 +53,8 @@
             function plotFourier(x,y,rotation,contourIndex){
               let previousX = x;
               let previousY = y;
+              strokeWeight(2);
+              stroke(255,255,255,127);
               for(let i=0;i<mags[contourIndex].length;i++){
                 let freq = freqs[contourIndex][i]
                 let radius = mags[contourIndex][i]
@@ -60,7 +62,6 @@
                 x += cos(freq*t+phase+rotation)*radius;
                 y += sin(freq*t+phase+rotation)*radius;
 
-                stroke(255);
                 noFill();
                 ellipse(previousX,previousY,radius*2);
 

@@ -15,6 +15,7 @@ import android.webkit.WebView;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import processing.core.PVector;
 
@@ -34,6 +35,7 @@ public class DesmosWebView extends AppCompatActivity {
         ArrayList<ArrayList<DiscreteFourierTransform.FourierCoefficient>> coefficientsList = new ArrayList<ArrayList<DiscreteFourierTransform.FourierCoefficient>>();
         for (ArrayList<PVector> path: drawing){
             ArrayList<DiscreteFourierTransform.FourierCoefficient> coefficients = DiscreteFourierTransform.DFT(path);
+            Collections.sort(coefficients, new DiscreteFourierTransform.FourierCoefficientComparator());
             coefficientsList.add(coefficients);
         }
 
@@ -62,7 +64,7 @@ public class DesmosWebView extends AppCompatActivity {
         if(visualEngine.equals("Desmos")){
             wvDesmos.loadUrl("https://appassets.androidplatform.net/assets/index.html");
         }else {
-            wvDesmos.loadUrl("https://appassets.androidplatform.net/assets/p5.html");
+                wvDesmos.loadUrl("https://appassets.androidplatform.net/assets/p5.html");
         }
     }
 }

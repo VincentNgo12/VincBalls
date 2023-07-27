@@ -1,6 +1,6 @@
 let t = 0
 let path = []
-let screenScale = 1;
+let screenScale = 0.5;
 let previousDistance = 0;
 mags.forEach(()=>{
     path.push([])
@@ -32,7 +32,7 @@ function draw() {
     scale(screenScale);
     background(0);
     for(let i=0;i<mags.length;i++){
-        let Vector = plotFourier(width,height,0,i)
+        let Vector = plotFourier(width+35,height,0,i)
 
         path[i].unshift(Vector);
     }

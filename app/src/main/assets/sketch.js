@@ -7,7 +7,8 @@ mags.forEach(()=>{
 })
 
 function setup() {
-  createCanvas(400, 800);
+  createCanvas(windowWidth+500, windowHeight+500);
+  window.scrollTo(windowWidth-100, windowHeight-200);
 }
 
 function touchMoved() {
@@ -32,7 +33,7 @@ function draw() {
     scale(screenScale);
     background(0);
     for(let i=0;i<mags.length;i++){
-        let Vector = plotFourier(width+35,height,0,i)
+        let Vector = plotFourier(width+200,height+200,0,i)
 
         path[i].unshift(Vector);
     }
